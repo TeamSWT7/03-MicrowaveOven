@@ -1,4 +1,4 @@
-@startuml
+@startuml SysTestTree2
 
 skinparam shadowing false
 'skinparam monochrome true
