@@ -61,12 +61,14 @@ namespace Microwave.Test.Integration
             
         }
 
-        [Test]
-        public void StartCooking_ValidParameters_PowerTubeStarted()
+        [TestCase(700, 400)]
+        [TestCase(150, 400)]
+        [TestCase(50, 400)]
+        public void StartCooking_ValidParameters_PowerTubeStarted(int power, int time)
         {
-            _cookController.StartCooking(50, 60);
+            _cookController.StartCooking(power, time);
 
-            _output.Received(1).OutputLine("PowerTube works with 50 %");
+            _output.Received(1).OutputLine($"PowerTube works with {power} %");
         }
 
         [Test]
@@ -96,5 +98,17 @@ namespace Microwave.Test.Integration
         {
             Assert.That(() => _cookController.StartCooking(power, time), Throws.TypeOf<ArgumentOutOfRangeException>().With.Message);
         }
+
+        [TestCase(700, 400)]
+        [TestCase(150, 400)]
+        [TestCase(50, 400)]
+        public void StartCooking_PowerIsOn_ExceptionThrown(int power, int time)
+        {
+            _cookController.StartCooking(power, time);
+            Assert.That(() => _cookController.StartCooking(power, time), Throws.TypeOf<ApplicationException>().With.Message);
+        }
+
+
+
     }
 }
