@@ -54,7 +54,7 @@ namespace Microwave.Test.Integration
             _userInterface = new UserInterface(_buttonPower, _buttonTimer, _buttonStartCancel, _door, _display, _light, _cookController);
         }
 
-        #region Light integrationtest
+        #region Light/UI integrationtest
         [Test]
         public void OnStartCancelPressed_LightIsOff_LightIsTurnedOn()
         {
