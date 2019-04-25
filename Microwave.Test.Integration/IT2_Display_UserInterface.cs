@@ -106,6 +106,20 @@ namespace Microwave.Test.Integration
         }
 
         [Test]
+        public void StartCancelButtonPressed_Cooking_DisplayCleared()
+        {
+            _userInterface.OnPowerPressed(null, EventArgs.Empty);
+
+            _userInterface.OnTimePressed(null, EventArgs.Empty);
+
+            _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
+
+            _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
+
+            _output.Received(1).OutputLine("Display cleared");
+        }
+
+        [Test]
         public void DoorOpened_MicrowaveIsReady_DisplayCleared()
         {
             _userInterface.OnPowerPressed(null, EventArgs.Empty);
@@ -138,7 +152,7 @@ namespace Microwave.Test.Integration
 
             _userInterface.CookingIsDone();
 
-            _output.Received(2).OutputLine("Display cleared");
+            _output.Received(1).OutputLine("Display cleared");
         }
 
         [Test]
@@ -152,7 +166,7 @@ namespace Microwave.Test.Integration
 
             _userInterface.OnDoorOpened(null, EventArgs.Empty);
 
-            _output.Received(2).OutputLine("Display cleared");
+            _output.Received(1).OutputLine("Display cleared");
         }
 
         #endregion
