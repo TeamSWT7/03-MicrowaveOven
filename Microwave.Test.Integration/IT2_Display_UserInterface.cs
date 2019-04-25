@@ -141,6 +141,20 @@ namespace Microwave.Test.Integration
             _output.Received(2).OutputLine("Display cleared");
         }
 
+        [Test]
+        public void DoorOpened_Cooking_DisplayCleared()
+        {
+            _userInterface.OnPowerPressed(null, EventArgs.Empty);
+
+            _userInterface.OnTimePressed(null, EventArgs.Empty);
+
+            _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
+
+            _userInterface.OnDoorOpened(null, EventArgs.Empty);
+
+            _output.Received(2).OutputLine("Display cleared");
+        }
+
         #endregion
 
         #region Timer button pressed tests

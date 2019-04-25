@@ -24,28 +24,15 @@ namespace Microwave.Test.Integration
         private IOutput _output;
 
         //Fakes for UserInterface Paramaters
-        private IButton _buttonPower;
-        private IButton _buttonTimer;
-        private IButton _buttonStartCancel;
-        private IDoor _door;
         private IDisplay _display;
         private IUserInterface _userInterface;
-        private ILight _light;
         private ITimer _timer;
 
 
         [SetUp]
         public void SetUp()
         {
-            #region Substitutes for paramaters for UserInterface
-            _buttonPower = Substitute.For<IButton>();
-            _buttonStartCancel = Substitute.For<IButton>();
-            _buttonTimer = Substitute.For<IButton>();
-
-            _door = Substitute.For<IDoor>();
-
-            _light = Substitute.For<ILight>();
-
+            #region Substitutes for paramaters for CookController
             _display = Substitute.For<IDisplay>();
 
             _timer = Substitute.For<ITimer>();
