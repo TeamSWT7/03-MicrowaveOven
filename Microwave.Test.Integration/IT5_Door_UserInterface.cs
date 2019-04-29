@@ -50,6 +50,7 @@ namespace Microwave.Test.Integration
             //Used for test
             _output = Substitute.For<IOutput>();
             _door = new Door();
+            _light = new Light(_output);
             _userInterface = new UserInterface(_buttonPower, _buttonTimer, _buttonStartCancel, _door, _display, _light, _cookController);
             
         }
@@ -59,18 +60,36 @@ namespace Microwave.Test.Integration
         [Test]
         public void DoorOpen_DoorOpnes_DoorIsOpen()
         {
-           // _door.Open();
+            _door.Open();
 
-           _userInterface.OnDoorOpened(_door, EventArgs.Empty);
-           _output.Received(1).OutputLine("Door is open");
+           _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
+
+           _output.Received(1).OutputLine("Light is turned on");
         }
 
         [Test]
-        public void DoorClose_DoorCloses_DoorIsClosed()
+        public void DoorClose_DoorIsOpenAndThenCloses_DoorIsClosed()
         {
-            //_door.Close();
+            // Open door
+            _door.Open();
+            _output.Received(1).OutputLine("Light is turned on");
+        
+            // Close door
+            _door.Close();
+            _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
 
-            _userInterface.OnDoorClosed(_door, EventArgs.Empty);
+            _output.Received(1).OutputLine("Light is turned off");
+        }
+
+        [Test]
+        public void DoorCloses_OpensDoorClosesDoorOpensDoor_DoorIsOpen()
+        {
+            _door.Open();
+            _door.Close();
+            _door.Open();
+
+            _output.Received(2).OutputLine("Light is turned on");
+            _output.Received(1).OutputLine("Light is turned off");
         }
 
         #endregion
