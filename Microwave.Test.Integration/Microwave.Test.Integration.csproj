@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IT8_TimeButton_UserInterface.cs" />
     <Compile Include="IT7_PowerButton_UserInterface.cs" />
     <Compile Include="IT5_Door_UserInterface.cs" />
     <Compile Include="IT4_Timer_CookController.cs" />

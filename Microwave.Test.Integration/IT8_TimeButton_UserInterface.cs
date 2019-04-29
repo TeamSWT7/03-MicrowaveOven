@@ -49,47 +49,20 @@ namespace Microwave.Test.Integration
             
             //Used for test
             _output = Substitute.For<IOutput>();
-            _buttonPower = new Button();
+            _buttonTimer = new Button();
             _display = new Display(_output);
             _userInterface = new UserInterface(_buttonPower, _buttonTimer, _buttonStartCancel, _door, _display, _light, _cookController);
             
         }
 
-        #region PowerButton/UI integrationtest
+        #region TimeButton/UI integrationtest
         
         [Test]
-        public void PowerButtonDisplay_PressedButton_ButtonPressedDisplayShows50W()
+        public void TimeButtonDisplay_PressedButton_ButtonPressed()
         {
-            _buttonPower.Press();
-
-            //50 W is default
-            _output.Received(1).OutputLine("Display shows: 50 W");
-        }
-
-        [Test]
-        public void PowerButtonDisplay_PressedButton_ButtonPressedDisplayShows100W()
-        {
-            _buttonPower.Press();
-            _buttonPower.Press();
-
-            _output.Received(1).OutputLine("Display shows: 100 W");
-        }
-
-        [Test]
-        public void PowerButtonDisplays_MicrowaveIsOff_OutputIsCorrect()
-        {
-            for (int i = 50; i <= 700; i += 50)
-            {
-                _buttonPower.Press();
-                _buttonPower.Press();
-            }
-
-            _buttonPower.Press();
             
-
-            _output.Received(3).OutputLine("Display shows: 50 W");
         }
-
+        
         #endregion
     }
 }
