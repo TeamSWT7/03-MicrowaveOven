@@ -58,11 +58,14 @@ namespace Microwave.Test.Integration
         #region TimeButton/UI integrationtest
         
         [Test]
-        public void TimeButtonDisplay_PressedButton_ButtonPressed()
+        public void TimeButtonDisplay_PressedButton_ButtonPressedOutputIsCorrect()
         {
-            
+            _buttonTimer.Press();
+            _buttonTimer.Press();
+
+            _output.Received(1).OutputLine("Display shows: 01:00");
         }
-        
+
         #endregion
     }
 }
