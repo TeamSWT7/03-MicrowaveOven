@@ -14,10 +14,10 @@ using NSubstitute.ReceivedExtensions;
 namespace Microwave.Test.Integration
 {
     [TestFixture]
-    public class IT1_Light_UserInterface
+    public class IT5_Door_UserInterface
     {
         //Uut
-        private Light _light;
+        private Door _door;
         private UserInterface _userInterface;
 
         //Output
@@ -27,9 +27,11 @@ namespace Microwave.Test.Integration
         private IButton _buttonPower;
         private IButton _buttonTimer;
         private IButton _buttonStartCancel;
-        private IDoor _door;
+        private ILight _light;
         private IDisplay _display;
         private ICookController _cookController;
+
+
 
 
         [SetUp]
@@ -39,110 +41,38 @@ namespace Microwave.Test.Integration
             _buttonPower = Substitute.For<IButton>();
             _buttonStartCancel = Substitute.For<IButton>();
             _buttonTimer = Substitute.For<IButton>();
-
-            _door = Substitute.For<IDoor>();
-
-            _display = Substitute.For<IDisplay>();
-
-            _cookController = Substitute.For<ICookController>();
+            _light = Substitute.For<ILight>();
+             _display = Substitute.For<IDisplay>();
+             _cookController = Substitute.For<ICookController>();
 
             #endregion
             
             //Used for test
             _output = Substitute.For<IOutput>();
-            _light = new Light(_output);
+            _door = new Door();
             _userInterface = new UserInterface(_buttonPower, _buttonTimer, _buttonStartCancel, _door, _display, _light, _cookController);
-        }
-
-        #region Light/UI integrationtest
-        [Test]
-        public void OnStartCancelPressed_LightIsOff_LightIsTurnedOn()
-        {
-            _userInterface.OnPowerPressed(null, EventArgs.Empty);
-
-            _userInterface.OnTimePressed(null, EventArgs.Empty);
-
-            _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
-
-            _output.Received(1).OutputLine("Light is turned on");
-        }
-
-        [Test]
-        public void CookingIsDone_LightIsOn_LightIsTurnedOff()
-        {
-            _userInterface.OnPowerPressed(null, EventArgs.Empty);
-
-            _userInterface.OnTimePressed(null, EventArgs.Empty);
-
-            _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
-
-            _output.Received(1).OutputLine("Light is turned on");
-
-            _userInterface.CookingIsDone();
-
-            _output.Received(1).OutputLine("Light is turned off");
-        }
-
-        [Test]
-        public void OnDoorOpened_LightIsOff_LightIsTurnedOn()
-        {
-            _userInterface.OnDoorOpened(null, EventArgs.Empty);
-
-            _output.Received(1).OutputLine("Light is turned on");
-        }
-
-        [Test]
-        public void OnDoorClosed_LightIsOn_LightIsTurnedOff()
-        {
-            _userInterface.OnDoorOpened(null, EventArgs.Empty);
-
-            _output.Received(1).OutputLine("Light is turned on");
-
-            _userInterface.OnDoorClosed(null, EventArgs.Empty);
-
-            _output.Received(1).OutputLine("Light is turned off");
             
         }
 
-        [Test]
-        public void OnDoorClosedAfterItOpened_LightIsOf_LightIsTurnedOn()
-        {
-            _userInterface.OnDoorOpened(null, EventArgs.Empty);
-
-            _userInterface.OnDoorClosed(null, EventArgs.Empty);
-
-            _userInterface.OnDoorOpened(null, EventArgs.Empty);
-
-            _output.Received(2).OutputLine("Light is turned on");
-            _output.Received(1).OutputLine("Light is turned off");
-        }
-
-        [Test]
-        public void OnTimePressedAndOnDoorOpened_LightIsOff_LightIsTurnedOn()
-        {
-            _userInterface.OnTimePressed(null, EventArgs.Empty);
-
-            _userInterface.OnDoorOpened(null, EventArgs.Empty);
-
-            _output.Received(1).OutputLine("Light is turned on");
-        }
+        #region Door integrationtest
         
         [Test]
-        public void StartCancelButtonPressed_Cooking_LightIsTurnedOff()
+        public void DoorOpen_DoorOpnes_DoorIsOpen()
         {
-            _userInterface.OnPowerPressed(null, EventArgs.Empty);
+           // _door.Open();
 
-            _userInterface.OnTimePressed(null, EventArgs.Empty);
-
-            _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
-
-            _output.Received(1).OutputLine("Light is turned on");
-
-            _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
-
-            _output.Received(1).OutputLine("Light is turned off");
+           _userInterface.OnDoorOpened(_door, EventArgs.Empty);
+           _output.Received(1).OutputLine("Door is open");
         }
-        
+
+        [Test]
+        public void DoorClose_DoorCloses_DoorIsClosed()
+        {
+            //_door.Close();
+
+            _userInterface.OnDoorClosed(_door, EventArgs.Empty);
+        }
+
         #endregion
     }
 }
