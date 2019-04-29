@@ -58,9 +58,36 @@ namespace Microwave.Test.Integration
         #region PowerButton/UI integrationtest
         
         [Test]
-        public void PowerButton_PressedButton_ButtonPressed()
+        public void PowerButtonDisplay_PressedButton_ButtonPressedDisplayShows50W()
         {
+            _buttonPower.Press();
 
+            //50 W is default
+            _output.Received(1).OutputLine("Display shows: 50 W");
+        }
+
+        [Test]
+        public void PowerButtonDisplay_PressedButton_ButtonPressedDisplayShows100W()
+        {
+            _buttonPower.Press();
+            _buttonPower.Press();
+
+            _output.Received(1).OutputLine("Display shows: 100 W");
+        }
+
+        [Test]
+        public void PowerButtonDisplays_MicrowaveIsOff_OutputIsCorrect()
+        {
+            for (int i = 50; i <= 700; i += 50)
+            {
+                _buttonPower.Press();
+                _buttonPower.Press();
+            }
+
+            _buttonPower.Press();
+            
+
+            _output.Received(3).OutputLine("Display shows: 50 W");
         }
 
         #endregion
