@@ -55,7 +55,7 @@ namespace Microwave.Test.Integration
             
         }
 
-        #region Door integrationtest
+        #region Door/UI integrationtest
         
         [Test]
         public void DoorOpen_DoorOpnes_DoorIsOpen()
