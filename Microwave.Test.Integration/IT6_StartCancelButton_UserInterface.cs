@@ -52,14 +52,14 @@ namespace Microwave.Test.Integration
         }
 
         [Test]
-        public void OnStartCancelPressed_myStateIsReady_NoOutput()
+        public void Press_ReadyState_NoOutput()
         {
             _startCancelButton.Press();
             _output.DidNotReceive().OutputLine(Arg.Any<string>());
         }
 
         [Test]
-        public void OnStartCancelPressed_myStateIsSetPower_LightIsTurnedOff()
+        public void Press_SetPowerState_LightIsTurnedOff()
         {
             _userInterface.OnPowerPressed(null, EventArgs.Empty);
             _light.TurnOn();
@@ -70,7 +70,7 @@ namespace Microwave.Test.Integration
         }
 
         [Test]
-        public void OnStartCancelPressed_myStateIsSetPower_DisplayIsCleared()
+        public void Press_SetPowerState_DisplayIsCleared()
         {
             _userInterface.OnPowerPressed(null, EventArgs.Empty);
             _output.ClearReceivedCalls();
@@ -80,7 +80,7 @@ namespace Microwave.Test.Integration
         }
 
         [Test]
-        public void OnStartCancelPressed_myStateIsSetTime_LightIsTurnedOn()
+        public void Press_SetTimeState_LightIsTurnedOn()
         {
             _userInterface.OnPowerPressed(null, EventArgs.Empty);
             _userInterface.OnTimePressed(null, EventArgs.Empty);
@@ -91,7 +91,7 @@ namespace Microwave.Test.Integration
         }
 
         [Test]
-        public void OnStartCancelPressed_myStateIsCooking_LightIsTurnedOff()
+        public void Press_CookingState_LightIsTurnedOff()
         {
             _userInterface.OnPowerPressed(null, EventArgs.Empty);
             _userInterface.OnTimePressed(null, EventArgs.Empty);
@@ -103,7 +103,7 @@ namespace Microwave.Test.Integration
         }
 
         [Test]
-        public void OnStartCancelPressed_myStateIsCooking_DisplayIsCleared()
+        public void Press_CookingState_DisplayIsCleared()
         {
             _userInterface.OnPowerPressed(null, EventArgs.Empty);
             _userInterface.OnTimePressed(null, EventArgs.Empty);
@@ -115,7 +115,7 @@ namespace Microwave.Test.Integration
         }
 
         [Test]
-        public void OnStartCancelPressed_myStateIsDoorOpen_NoOutput()
+        public void Press_DoorOpenState_NoOutput()
         {
             _userInterface.OnDoorOpened(null, EventArgs.Empty);
             _output.ClearReceivedCalls();

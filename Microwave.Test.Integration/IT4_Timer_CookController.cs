@@ -91,15 +91,15 @@ namespace Microwave.Test.Integration
         [TestCase(2000)]
         public void Stop_TimerRunning_TimerStopped(int sleep)
         {
-            _cookController.StartCooking(50, 10000);
+            _cookController.StartCooking(50, 2000);
 
             _cookController.Stop();
 
-            Assert.That(_timer.TimeRemaining, Is.EqualTo(10000));
+            Assert.That(_timer.TimeRemaining, Is.EqualTo(2000));
 
             Thread.Sleep(sleep);
 
-            Assert.That(_timer.TimeRemaining, Is.EqualTo(10000));
+            Assert.That(_timer.TimeRemaining, Is.EqualTo(2000));
 
             _cookController.Stop();
         }
@@ -107,12 +107,13 @@ namespace Microwave.Test.Integration
         [Test]
         public void Expire_TimerRunsOut_CookingIsDoneIsCalled()
         {
-            _cookController.StartCooking(50, 10000);
+            _cookController.StartCooking(50, 2000);
+           
+            Assert.That(_timer.TimeRemaining, Is.EqualTo(2000));
 
-
-            Assert.That(_timer.TimeRemaining, Is.EqualTo(10000));
-
-            Thread.Sleep(10000);
+            // Sleep until the timer should be 0, with added buffer since we can never
+            // be sure that the interval ticks for exactly 2000 ms.
+            Thread.Sleep(2000 + 100);
 
             Assert.That(_timer.TimeRemaining, Is.EqualTo(0));
 
