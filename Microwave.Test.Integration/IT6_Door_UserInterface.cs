@@ -8,7 +8,7 @@ using NSubstitute;
 namespace Microwave.Test.Integration
 {
     [TestFixture]
-    public class IT5_Door_UserInterface
+    public class IT6_Door_UserInterface
     {
         //Uut
         private Door _door;
