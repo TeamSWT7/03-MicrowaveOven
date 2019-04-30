@@ -59,8 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IT5_UserInterface_CookController.cs" />
-    <Compile Include="IT9_TimeButton_UserInterface.cs" />
-    <Compile Include="IT8_PowerButton_UserInterface.cs" />
+    <Compile Include="IT8_TimeButton_UserInterface.cs" />
+    <Compile Include="IT9_PowerButton_UserInterface.cs" />
     <Compile Include="IT6_Door_UserInterface.cs" />
     <Compile Include="IT4_Timer_CookController.cs" />
     <Compile Include="IT3_PowerTube_CookController.cs" />
