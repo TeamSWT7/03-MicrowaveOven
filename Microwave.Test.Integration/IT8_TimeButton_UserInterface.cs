@@ -1,15 +1,9 @@
 ﻿using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MicrowaveOvenClasses;
 using MicrowaveOvenClasses.Boundary;
 using MicrowaveOvenClasses.Controllers;
 using MicrowaveOvenClasses.Interfaces;
 using NSubstitute;
-using NSubstitute.ReceivedExtensions;
 
 namespace Microwave.Test.Integration
 {
@@ -56,16 +50,16 @@ namespace Microwave.Test.Integration
         }
 
         #region TimeButton/UI integrationtest
-        /*
+        
         [Test]
         public void TimeButtonDisplay_PressedButton_ButtonPressedOutputIsCorrect()
         {
-            _buttonTimer.Press();
+            _userInterface.OnPowerPressed(null, EventArgs.Empty);
             _buttonTimer.Press();
 
             _output.Received(1).OutputLine("Display shows: 01:00");
         }
-        */
+        
 
         #endregion
     }
