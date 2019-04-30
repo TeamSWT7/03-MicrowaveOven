@@ -17,19 +17,19 @@ frame IT1 {
 frame Application
 
 frame Core {
-    card UserInterface
-    card CookController<<sut>>
+    card UserInterface<<tested>>
+    card CookController<<tested>>
 
-    card Door
     card Light<<tested>>
     card Timer<<tested>>
     card PowerTube<<tested>>
     card Display<<tested>>
     card Output<<tested>>
 
-    card TimeButton
-    card PowerButton
-    card StartCancelButton
+    card Door<<sut>>
+    card TimeButton<<sut>>
+    card PowerButton<<sut>>
+    card StartCancelButton<<sut>>
 }
 
 Application -- Core
