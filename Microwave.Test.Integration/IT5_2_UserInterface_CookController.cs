@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Threading;
 using MicrowaveOvenClasses.Boundary;
 using MicrowaveOvenClasses.Controllers;
 using MicrowaveOvenClasses.Interfaces;
@@ -52,6 +53,7 @@ namespace Microwave.Test.Integration
             _cookController = new CookController(_timer, _display, _powerTube);
             _userInterface = new UserInterface(_buttonPower, _buttonTimer, _buttonStartCancel, _door, _display, _light,
                 _cookController);
+            _cookController.UI = _userInterface;
         }
 
         [TestCase(0, 50)]
@@ -109,6 +111,30 @@ namespace Microwave.Test.Integration
             _timer.Received(1).Stop();
         }
 
+        [Test]
+        public void OnTimerExpired_SetCookingState_DisplayIsCleared()
+        {
+            _userInterface.OnPowerPressed(null, EventArgs.Empty);
+            _userInterface.OnTimePressed(null, EventArgs.Empty);
+            _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
+            _output.ClearReceivedCalls();
+            
+            _cookController.OnTimerExpired(null, EventArgs.Empty);
 
+            _output.Received(1).OutputLine("Display cleared");
+        }
+
+        [Test]
+        public void OnTimerExpired_SetCookingState_LightIsTurnedOff()
+        {
+            _userInterface.OnPowerPressed(null, EventArgs.Empty);
+            _userInterface.OnTimePressed(null, EventArgs.Empty);
+            _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
+            _output.ClearReceivedCalls();
+
+            _cookController.OnTimerExpired(null, EventArgs.Empty);
+
+            _output.Received(1).OutputLine("Light is turned off");
+        }
     }
 }
