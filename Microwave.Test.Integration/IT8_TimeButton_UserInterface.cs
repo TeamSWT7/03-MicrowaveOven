@@ -25,13 +25,11 @@ namespace Microwave.Test.Integration
         private IDisplay _display;
         private ICookController _cookController;
 
-
-
-
         [SetUp]
         public void SetUp()
         {
             #region Substitutes for paramaters for UserInterface
+
             _buttonStartCancel = Substitute.For<IButton>();
             _buttonPower = Substitute.For<IButton>();
             _light = Substitute.For<ILight>();
@@ -46,11 +44,10 @@ namespace Microwave.Test.Integration
             _buttonTimer = new Button();
             _display = new Display(_output);
             _userInterface = new UserInterface(_buttonPower, _buttonTimer, _buttonStartCancel, _door, _display, _light, _cookController);
-            
         }
 
         #region TimeButton/UI integrationtest
-        
+
         [Test]
         public void TimeButtonDisplay_PressedButton_ButtonPressedOutputIsCorrect()
         {
@@ -79,8 +76,6 @@ namespace Microwave.Test.Integration
             _buttonTimer.Press();
             _buttonTimer.Press();
 
-            _output.Received(1).OutputLine("Display shows: 01:00");
-            _output.Received(1).OutputLine("Display shows: 02:00");
             _output.Received(1).OutputLine("Display shows: 03:00");
         }
         #endregion
