@@ -45,7 +45,7 @@ namespace Microwave.Test.Integration
 
             _light=new Light(_output);
 
-            _timer = new Timer();
+            _timer = Substitute.For<ITimer>();
             _display = new Display(_output);
             _powerTube = new PowerTube(_output);
 
@@ -75,5 +75,40 @@ namespace Microwave.Test.Integration
             _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
             _output.Received(1).OutputLine($"PowerTube works with {power} W");
         }
+
+        [TestCase(0, 60000)]
+        [TestCase(1, 120000)]
+        [TestCase(2, 180000)]
+        [TestCase(3, 240000)]
+        [TestCase(4, 300000)]
+        [TestCase(5, 360000)]
+        public void Press_SetTimeState_CookingStartsWithCorrectTime(int timesTimerButtonPressed, int expectedTime)
+        {
+            _userInterface.OnPowerPressed(null, EventArgs.Empty);
+            _userInterface.OnTimePressed(null, EventArgs.Empty);
+            for (int i = 0; i < timesTimerButtonPressed; i++)
+            {
+                _userInterface.OnTimePressed(null, EventArgs.Empty);
+            }
+            _output.ClearReceivedCalls();
+
+            _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
+            _timer.Received().Start(expectedTime);
+        }
+
+        [Test]
+        public void Open_SetCookingState_MyCookerStops()
+        {
+            _userInterface.OnPowerPressed(null, EventArgs.Empty);
+            _userInterface.OnTimePressed(null, EventArgs.Empty);
+            _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
+            _output.ClearReceivedCalls();
+            _timer.ClearReceivedCalls();
+
+            _userInterface.OnDoorOpened(null, EventArgs.Empty);
+            _timer.Received(1).Stop();
+        }
+
+
     }
 }
