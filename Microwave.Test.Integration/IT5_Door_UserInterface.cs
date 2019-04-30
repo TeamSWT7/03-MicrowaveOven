@@ -49,38 +49,35 @@ namespace Microwave.Test.Integration
         #region Door/UI integrationtest
         
         [Test]
-        public void DoorOpen_DoorOpnes_DoorIsOpen()
+        public void Open_ReadyState_LightIsTurnedOn()
         {
             _door.Open();
-
-           _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
 
            _output.Received(1).OutputLine("Light is turned on");
         }
 
         [Test]
-        public void DoorClose_DoorIsOpenAndThenCloses_DoorIsClosed()
+        public void Close_DoorOpenState_LightIsTurnedOff()
         {
             // Open door
             _door.Open();
-            _output.Received(1).OutputLine("Light is turned on");
         
             // Close door
             _door.Close();
-            _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
 
             _output.Received(1).OutputLine("Light is turned off");
         }
 
         [Test]
-        public void DoorCloses_OpensDoorClosesDoorOpensDoor_DoorIsOpen()
+        public void Open_ReadyStateAfterClosed_LightIsTurnedOn()
         {
+            // Just to check that ReadyState is set again after the door is closed
             _door.Open();
             _door.Close();
             _door.Open();
 
-            _output.Received(2).OutputLine("Light is turned on");
             _output.Received(1).OutputLine("Light is turned off");
+            _output.Received(2).OutputLine("Light is turned on");
         }
 
         #endregion
