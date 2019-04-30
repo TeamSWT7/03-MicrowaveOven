@@ -58,11 +58,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="IT7_PowerButton_UserInterface.cs" />
+    <Compile Include="IT5_Door_UserInterface.cs" />
+    <Compile Include="IT4_Timer_CookController.cs" />
+    <Compile Include="IT3_PowerTube_CookController.cs" />
+    <Compile Include="IT2_Display_UserInterface.cs" />
+    <Compile Include="IT1_Light_UserInterface.cs" />
+    <Compile Include="IT6_StartCancelButton_UserInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MicrowaveOvenClasses\MicrowaveOvenClasses.csproj">
+      <Project>{2b04da6b-afe9-4548-aa05-84d806ba0fa4}</Project>
+      <Name>MicrowaveOvenClasses</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

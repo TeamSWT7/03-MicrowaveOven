@@ -1,0 +1,58 @@
+@startuml DependecyTree
+
+skinparam shadowing false
+'skinparam monochrome true
+skinparam backgroundColor transparent
+skinparam classBackgroundColor transparent
+skinparam style strictuml
+
+'Testing colors:
+skinparam card {
+    backgroundColor<<sut>> brown
+    backgroundColor<<tested>> lawngreen
+}
+
+frame DependecyTree {
+
+frame Application
+
+frame Core {
+    card UserInterface
+    card CookController 
+
+    card Door
+    card Light
+    card Timer
+    card PowerTube
+    card Display
+    card Output
+
+    card TimeButton
+    card PowerButton
+    card StartCancelButton
+}
+
+Application -- Core
+
+TimeButton -- UserInterface
+PowerButton -- UserInterface
+StartCancelButton -- UserInterface
+Door -- UserInterface
+
+UserInterface - CookController [headport=nw;tailport=e]
+UserInterface -- Light
+UserInterface -- Display
+
+CookController - UserInterface
+CookController -- Light
+CookController -- Display
+CookController -- Timer
+CookController -- PowerTube
+
+Light -- Output
+Display -- Output
+PowerTube -- Output
+
+}
+
+@enduml

@@ -83,9 +83,9 @@ namespace MicrowaveOvenClasses.Controllers
                     myState = States.READY;
                     break;
                 case States.SETTIME:
-                    myDisplay.Clear();
+                    //myDisplay.Clear(); It should clear Display according to UC
                     myLight.TurnOn();
-                    myCooker.StartCooking(powerLevel, time*60);
+                    myCooker.StartCooking(powerLevel, (time*60) * 1000);
                     myState = States.COOKING;
                     break;
                 case States.COOKING:
@@ -124,6 +124,7 @@ namespace MicrowaveOvenClasses.Controllers
                     myCooker.Stop();
                     powerLevel = 50;
                     time = 1;
+                    myDisplay.Clear(); //Was missing according to Extension 4
                     myState = States.DOOROPEN;
                     break;
             }

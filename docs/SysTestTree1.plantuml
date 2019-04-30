@@ -1,0 +1,58 @@
+@startuml SysTestTree1
+
+skinparam shadowing false
+'skinparam monochrome true
+skinparam backgroundColor transparent
+skinparam classBackgroundColor transparent
+skinparam style strictuml
+
+'Testing colors:
+skinparam card {
+    backgroundColor<<sut>> brown
+    backgroundColor<<tested>> lawngreen
+}
+
+frame IT1 {
+
+frame Application
+
+frame Core {
+    card UserInterface
+    card CookController 
+
+    card Door
+    card Light<<sut>>
+    card Timer<<tested>>
+    card PowerTube<<sut>>
+    card Display<<sut>>
+    card Output<<tested>>
+
+    card TimeButton
+    card PowerButton
+    card StartCancelButton
+}
+
+Application -- Core
+
+TimeButton -- UserInterface
+PowerButton -- UserInterface
+StartCancelButton -- UserInterface
+Door -- UserInterface
+
+UserInterface - CookController
+UserInterface -- Light
+UserInterface -- Display
+
+CookController - UserInterface
+CookController -- Light
+CookController -- Display
+CookController -- Timer
+CookController -- PowerTube
+
+Light -- Output
+Display -- Output
+PowerTube -- Output
+
+}
+
+@enduml
