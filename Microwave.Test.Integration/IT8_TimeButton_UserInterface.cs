@@ -59,8 +59,30 @@ namespace Microwave.Test.Integration
 
             _output.Received(1).OutputLine("Display shows: 01:00");
         }
-        
 
+        [Test]
+        public void TimeButtonDisplayTwoTimes_PressedButton_ButtonPressedOutputIsCorrect()
+        {
+            _userInterface.OnPowerPressed(null, EventArgs.Empty);
+            _buttonTimer.Press();
+            _buttonTimer.Press();
+
+            _output.Received(1).OutputLine("Display shows: 01:00");
+            _output.Received(1).OutputLine("Display shows: 02:00");
+        }
+
+        [Test]
+        public void TimeButtonDisplayThreeTimes_PressedButton_ButtonPressedOutputIsCorrect()
+        {
+            _userInterface.OnPowerPressed(null, EventArgs.Empty);
+            _buttonTimer.Press();
+            _buttonTimer.Press();
+            _buttonTimer.Press();
+
+            _output.Received(1).OutputLine("Display shows: 01:00");
+            _output.Received(1).OutputLine("Display shows: 02:00");
+            _output.Received(1).OutputLine("Display shows: 03:00");
+        }
         #endregion
     }
 }
