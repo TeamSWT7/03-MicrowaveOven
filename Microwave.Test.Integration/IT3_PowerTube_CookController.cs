@@ -55,7 +55,7 @@ namespace Microwave.Test.Integration
         {
             _cookController.StartCooking(power, time);
 
-            _output.Received(1).OutputLine($"PowerTube works with {power} %");
+            _output.Received(1).OutputLine($"PowerTube works with {power} W");
         }
 
         [Test]

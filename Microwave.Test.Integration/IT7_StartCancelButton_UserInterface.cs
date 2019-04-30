@@ -14,7 +14,7 @@ using NSubstitute.ReceivedExtensions;
 namespace Microwave.Test.Integration
 {
     [TestFixture]
-    public class IT6_StartCancelButton_UserInterface
+    public class IT7_StartCancelButton_UserInterface
     {
         // UUt
         private Button _startCancelButton;
