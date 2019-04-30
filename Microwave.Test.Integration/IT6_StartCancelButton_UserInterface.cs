@@ -91,15 +91,37 @@ namespace Microwave.Test.Integration
         }
 
         [Test]
-        public void OnStartCancelPressed_myStateIsSetTime_DisplayIsCleared()
+        public void OnStartCancelPressed_myStateIsCooking_LightIsTurnedOff()
         {
-            _userInterface.OnPowerPressed(new object(), EventArgs.Empty);
-            _userInterface.OnTimePressed(new object(), EventArgs.Empty);
+            _userInterface.OnPowerPressed(null, EventArgs.Empty);
+            _userInterface.OnTimePressed(null, EventArgs.Empty);
+            _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
             _output.ClearReceivedCalls();
 
             _startCancelButton.Press();
-            //_output.Received(1).OutputLine("Display cleared");
-            _output.Received().OutputLine(Arg.Is<string>(str => str.Contains("cleared")));
+            _output.Received(1).OutputLine("Light is turned off");
+        }
+
+        [Test]
+        public void OnStartCancelPressed_myStateIsCooking_DisplayIsCleared()
+        {
+            _userInterface.OnPowerPressed(null, EventArgs.Empty);
+            _userInterface.OnTimePressed(null, EventArgs.Empty);
+            _userInterface.OnStartCancelPressed(null, EventArgs.Empty);
+            _output.ClearReceivedCalls();
+
+            _startCancelButton.Press();
+            _output.Received(1).OutputLine("Display cleared");
+        }
+
+        [Test]
+        public void OnStartCancelPressed_myStateIsDoorOpen_NoOutput()
+        {
+            _userInterface.OnDoorOpened(null, EventArgs.Empty);
+            _output.ClearReceivedCalls();
+
+            _startCancelButton.Press();
+            _output.DidNotReceive().OutputLine(Arg.Any<string>());
         }
     }
 }
