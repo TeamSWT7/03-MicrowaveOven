@@ -58,11 +58,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="IT5_2_UserInterface_CookController.cs" />
-=======
     <Compile Include="IT8_TimeButton_UserInterface.cs" />
->>>>>>> develop
     <Compile Include="IT7_PowerButton_UserInterface.cs" />
     <Compile Include="IT5_Door_UserInterface.cs" />
     <Compile Include="IT4_Timer_CookController.cs" />
