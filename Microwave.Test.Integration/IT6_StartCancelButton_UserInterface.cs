@@ -89,5 +89,17 @@ namespace Microwave.Test.Integration
             _startCancelButton.Press();
             _output.Received(1).OutputLine("Light is turned on");
         }
+
+        [Test]
+        public void OnStartCancelPressed_myStateIsSetTime_DisplayIsCleared()
+        {
+            _userInterface.OnPowerPressed(new object(), EventArgs.Empty);
+            _userInterface.OnTimePressed(new object(), EventArgs.Empty);
+            _output.ClearReceivedCalls();
+
+            _startCancelButton.Press();
+            //_output.Received(1).OutputLine("Display cleared");
+            _output.Received().OutputLine(Arg.Is<string>(str => str.Contains("cleared")));
+        }
     }
 }
