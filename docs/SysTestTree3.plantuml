@@ -1,4 +1,4 @@
-@startuml SysTestTree3
+@startuml SysTestTree1
 
 skinparam shadowing false
 'skinparam monochrome true
@@ -12,24 +12,24 @@ skinparam card {
     backgroundColor<<tested>> lawngreen
 }
 
-frame IT3 {
+frame IT1 {
 
 frame Application
 
 frame Core {
-    card UserInterface<<tested>>
+    card UserInterface<<sut>>
     card CookController<<tested>>
 
+    card Door
     card Light<<tested>>
     card Timer<<tested>>
     card PowerTube<<tested>>
     card Display<<tested>>
     card Output<<tested>>
 
-    card Door<<sut>>
-    card TimeButton<<sut>>
-    card PowerButton<<sut>>
-    card StartCancelButton<<sut>>
+    card TimeButton
+    card PowerButton
+    card StartCancelButton
 }
 
 Application -- Core
@@ -40,15 +40,15 @@ StartCancelButton -- UserInterface
 Door -- UserInterface
 
 UserInterface - CookController
-UserInterface -- Light
-UserInterface -- Display
+UserInterface --- Light
+UserInterface --- Display
 
-CookController - UserInterface
-CookController -- Light
+CookController -- UserInterface
 CookController -- Display
 CookController -- Timer
 CookController -- PowerTube
 
+Timer - CookController
 Light -- Output
 Display -- Output
 PowerTube -- Output
