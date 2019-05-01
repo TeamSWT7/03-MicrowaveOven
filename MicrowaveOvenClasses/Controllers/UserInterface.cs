@@ -83,7 +83,7 @@ namespace MicrowaveOvenClasses.Controllers
                     myState = States.READY;
                     break;
                 case States.SETTIME:
-                    //myDisplay.Clear(); It should clear Display according to UC
+                    //myDisplay.Clear(); It shouldn't clear Display according to UC
                     myLight.TurnOn();
                     myCooker.StartCooking(powerLevel, (time*60) * 1000);
                     myState = States.COOKING;

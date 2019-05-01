@@ -40,15 +40,15 @@ StartCancelButton -- UserInterface
 Door -- UserInterface
 
 UserInterface - CookController
-UserInterface -- Light
-UserInterface -- Display
+UserInterface --- Light
+UserInterface --- Display
 
-CookController - UserInterface
-CookController -- Light
+CookController -- UserInterface
 CookController -- Display
 CookController -- Timer
 CookController -- PowerTube
 
+Timer - CookController
 Light -- Output
 Display -- Output
 PowerTube -- Output
